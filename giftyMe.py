@@ -12,10 +12,10 @@ from flask_wtf import Form
 from flask_socketio import SocketIO
 from time import gmtime, strftime
 from urllib import *
-from serviceRequest import get_service
+# from serviceRequest import get_service
 
 app = Flask(__name__)
-app.secret_key = "GiftForMe"
+app.secret_key = "GiftMe"
 app.config.from_object(__name__)
 socketio = SocketIO(app)
 
@@ -27,9 +27,9 @@ CLIENT_SECRET = 'LU9kNT0qs79FzZRx'
 SUCCESS_CODE = ['200', '201']
 
 
-@app.before_request
-def before_request():
-    print("loading config...")
+# @app.before_request
+# def before_request():
+#     print("loading config...")
 
 
 @app.route('/')
@@ -38,44 +38,51 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/Product', method=['GET', 'POST'])
-def product():
-    return redirect(url_for(''))
+# @app.route('/Product', method=['GET', 'POST'])
+# def product():
+#     return redirect(url_for(''))
 
 
-@app.route('/Order', method=['POST'])
-def order():
-    """
-    Order tab
-    :return:
-    """
-    id_product = request.args.get('id_product')
-    id_user = request.args.get('id_user')
-    payment_credential = request.args.get('payment_credential')
+# @app.route('/Order', method=['POST'])
+# def order():
+#     """
+#     Order tab
+#     :return:
+#     """
+#     id_product = request.args.get('id_product')
+#     id_user = request.args.get('id_user')
+#     payment_credential = request.args.get('payment_credential')
 
 
-@app.route('/Login', method=['POST'])
+@app.route('/login', methods=['GET'])
 def login():
     """
     :return:
     """
-    email = requests.args.get('email')
-    pwd = requests.args.get('pwd')
-    service = 'login_sm'
-    data = {'email': email, 'password': pwd}
-    token_info = get_token()
-    token = token_info['token']
-    token_exp_time = token_info['time_expired']
-    result = get_service(token, service, token_exp_time, 'post', data)
-    if result is not False:
-        ## TODO: GET customer profile and return approate profile login
-        return render_template('')
+    #email = requests.args.get('email')
+    #pwd = requests.args.get('pwd')
 
+    # service = 'login_sm'
+    # data = {'email': email, 'password': pwd}
+    # token_info = get_token()
+    # token = token_info['token']
+    # token_exp_time = token_info['time_expired']
+    # result = get_service(token, service, token_exp_time, 'post', data)
+    # if result is not False:
+    #     ## TODO: GET customer profile and return approate profile login
 
-def get_token():
-    # TODO - return a dictionary ['token': token, 'expire': expire]
-    token_info = {'token': None, 'time_expired': None}
-    return token_info
+    return render_template('singin.html')
+    # elif request.method == 'POST':
+    #     email = requests.form['email']
+    #     pwd = requests.form['pwd']
+    #     print(email)
+    #     print('pwd: ', pwd)
+    # return render_template('index.html')
+
+# def get_token():
+#     # TODO - return a dictionary ['token': token, 'expire': expire]
+#     token_info = {'token': None, 'time_expired': None}
+#     return token_info
 
 # TODO: Services
 #  2.  Get single product*
@@ -99,4 +106,10 @@ def get_token():
 #  18. Customer login*
 #  19. Customer logout *
 ## 20. persistence??
+def my_main():
+    socketio.run(app, host='0.0.0.0')
+    # app.run(debug=True, host='0.0.0.0')
+
+if __name__ == '__main__':
+    socketio.run(app)
 
