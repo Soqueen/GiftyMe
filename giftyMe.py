@@ -8,7 +8,8 @@ import subprocess
 
 
 from flask import flash, Flask, jsonify, request, redirect, sessions, send_file, url_for, render_template
-from flask_wtf import Form
+#from flask_wtf import Form
+from forms import *
 from flask_socketio import SocketIO
 from time import gmtime, strftime
 from urllib import *
@@ -27,9 +28,9 @@ CLIENT_SECRET = 'LU9kNT0qs79FzZRx'
 SUCCESS_CODE = ['200', '201']
 
 
-# @app.before_request
-# def before_request():
-#     print("loading config...")
+@app.before_request
+def before_request():
+    print("loading config...")
 
 
 @app.route('/')
@@ -70,8 +71,7 @@ def login():
     # result = get_service(token, service, token_exp_time, 'post', data)
     # if result is not False:
     #     ## TODO: GET customer profile and return approate profile login
-
-    return render_template('singin.html')
+    return render_template('signin.html')
     # elif request.method == 'POST':
     #     email = requests.form['email']
     #     pwd = requests.form['pwd']
@@ -79,6 +79,14 @@ def login():
     #     print('pwd: ', pwd)
     # return render_template('index.html')
 
+
+@app.route('/signIn', methods=['POST'])
+def signIn():
+    email = request.form['email']
+    pwd = request.form['pwd']
+    print(email)
+    print('pwd: ', pwd)
+    return render_template('index.html')
 # def get_token():
 #     # TODO - return a dictionary ['token': token, 'expire': expire]
 #     token_info = {'token': None, 'time_expired': None}
