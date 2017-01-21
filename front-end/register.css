@@ -1,0 +1,20 @@
+.container {
+	color: #2A363B;
+}
+
+h1 {
+	text-align: left;
+}
+
+form {
+	text-align: left;
+}
+
+.form-control {
+	width: 50%;
+}
+
+.btn-default {
+	background-color: #E84A5f;
+	color: #fff;
+}
