@@ -1,9 +1,14 @@
 .text-center {
-	background-color: #DCEDC2;
+	background-color: #fefefe;
 }
 
 .container {
 	color: #2A363B;
+}
+
+.sidenav a {
+	color: #fff;
+	text-transform: uppercase;
 }
 
 h1 {
@@ -19,6 +24,16 @@ form {
 }
 
 .btn-default {
-	background-color: #E84A5f;
-	color: #fff;
+	background-color: #FCDF2B;
+	color: #27394f;
+	border-color: #e2c713;
+	box-shadow: 0 2px 0 #e6ca1f;
+}
+
+.btn {
+	border: none;
+	font-family: Dosis, sans-serif;
+	text-transform: uppercase;
+	border-radius: 0px;
+	outline: 0!important;
 }
