@@ -1,24 +1,18 @@
-import collections
-import codecs
 import json
-import os
-import re
 import requests
-import subprocess
 
-
-from flask import flash, Flask, jsonify, request, redirect, sessions, send_file, url_for, render_template
-from flask_wtf import Form
-from flask_socketio import SocketIO
-from time import gmtime, strftime
-from urllib import *
+#from flask import flash, Flask, jsonify, request, redirect, sessions, send_file, url_for, render_template
+#from flask_wtf import Form
+#from flask_socketio import SocketIO
+#from time import gmtime, strftime
+#from urllib import *
 
 BASE_URL = 'https://api.beta.yaas.io/hybris'
 TENANT = 'conuhack2017'
 LANGUAGE = 'en'
 CLIENT_ID = 'UZESkK5v7Q6H7i580D1U7Ye8k6zoNhK7'
 CLIENT_SECRET = 'LU9kNT0qs79FzZRx'
-SUCCESS_CODE = ['200', '201']
+SUCCESS_CODE = [200, 201]
 TOKEN = "Bearer 021-520e7244-ea6e-4c58-88e6-5179b3ae778a"
 
 def get_new_token():
@@ -31,17 +25,8 @@ def get_new_token():
     r = requests.request("POST", url, data=payload, headers=headers)
     jr=r.json()
     return ('Bearer '+jr['access_token'])
-
-def request_error(responce):
-    # token expired
-    if responce.status_code == 401:
-        global TOKEN
-        TOKEN = get_new_token()
-        print("401 error, new token generated: "+TOKEN)
-        return -1
-    return 0
         
-def get_service(service, request_type, **params):
+def get_service(service, **params):
     """
     Request different services to YAAS api
     :param token:
@@ -80,10 +65,11 @@ def get_service(service, request_type, **params):
       "mixins": {}
     },
     "mixins": {}
-  }"""
+    }"""
     if service == 'postProduct':
         url = BASE_URL+'/product'+'/v2/'+TENANT+'/products'
-        payload = "{\r\n    \"name\": \"apple1\",\r\n    \"code\": \"apple3\",\r\n    \"description\": \"da la da da da\",\r\n    \"published\":\"true\"\r\n}"
+        # payload = "{\r\n    \"name\": \"apple1\",\r\n    \"code\": \"apple3\",\r\n    \"description\": \"da la da da da\",\r\n    \"published\":\"true\"\r\n}"
+        payload = str(params)
         headers = {
                     'authorization': "Bearer 021-ccf4970e-beaa-4131-8ba1-910122c22c73",
                     'content-language': "pl",
@@ -101,10 +87,11 @@ def get_service(service, request_type, **params):
         headers = {"Authorization": TOKEN, "Accept-Language": "pl", "hybris-languages": "en","Content-Type":"application/json"}
         r = requests.get(url=url,headers=headers)
     #  2.  Get a single product*
+    # params = {productid: xxx}
     elif service == 'getOneProduct':
-        url = BASE_URL+'/product'+'/v2/'+TENANT+'/products'+ ??product id 
-        headers = {"Authorization": TOKEN, "Accept-Language": "pl", "hybris-languages": "en","Content-Type":"application/json"}
-        r = requests.get(url=url,headers=headers)
+       url = BASE_URL+'/product'+'/v2/'+TENANT+'/products'+ params['productid'] 
+       headers = {"Authorization": TOKEN, "Accept-Language": "pl", "hybris-languages": "en","Content-Type":"application/json"}
+       r = requests.get(url=url,headers=headers)
     
     #  3.  Get all prices*
     #  4.  Get single price*
@@ -129,6 +116,7 @@ def get_service(service, request_type, **params):
         payload = '''{"email":"'''+params['email']+'''","password":"'''+params['password']+'''"}'''
         # payload = "email={}&password={}".format(params['email'],params['password'])
         r = requests.post(url=url, headers=headers,data=payload)
+        # r.json example: {"id":"C9577975961","link":"https://api.yaas.io/hybris/customer/v1/bsdqa/me"}
     #  15. Reset password for customer *
 
     #  16. Reset-Update password for customer*
@@ -163,13 +151,18 @@ def get_service(service, request_type, **params):
         r = requests.request("GET", url, headers=headers)
     
     
-    status = request_error(r)
-    # -1 : token expire error 
+    if r.status_code == 401:
+        global TOKEN
+        TOKEN = get_new_token()
+        print("401 error, new token generated: "+TOKEN)
     ####################### RISKY OF INFINITE LOOP ##########################3 
-    if status==-1:
-        get_service(token, service, token_exp_time, request_type, **params)
-    
-    return r.json()
+        get_service(service, **params)
+    elif r.status_code is in SUCCESS_CODE:
+        return r.json()
+    return False
 
+if __name__ == '__main__':
+    params = {"name": "apple1","code": "apple3","description": "da la da da da","published":"true"}
+    get_service('postProduct', params)
     
 
