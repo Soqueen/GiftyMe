@@ -50,11 +50,6 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
       <a class="navbar-brand" href="#">GiftyMe</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
@@ -76,7 +71,7 @@
   <div class="row content">
 
     <div class="col-md-2 sidenav">
-      <p><a href="{{ url_for('event') }}">Event Gifts</a></p>
+      <p><a href="{{ url_for('event')}}">Event Gifts</a></p>
       <p><a href="#">Special Discounts</a></p>
       <p><a href="#">New arrival</a></p>
       <p><a href="#">Past Orders</a></p>
@@ -98,17 +93,17 @@
       <!-- <div class="row product-grid ng-isolate-scope" infinite-scroll="addMore()" infinite-scroll-distance="0" infinite-scroll-imeediate-check="false" infinite-scroll-data="pagination" infinite-scroll-visible-items> -->
 
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ng-scope column productbox">
-            <a href="#"><img class="img-responsive" src="http://wallpaperscraft.com/image/gift_box_ribbon_heart_106577_1920x1080.jpg"></a>
+            <a href="{{ url_for('valentine_gift') }}"><img class="img-responsive" src="http://wallpaperscraft.com/image/gift_box_ribbon_heart_106577_1920x1080.jpg"></a>
             <div class="producttitle">Valentine's Day</div>
             <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">GO</a></div><div class="pricetext"></div></div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ng-scope column productbox">
-            <a href="#"><img class="img-responsive" src="https://images6.alphacoders.com/736/736528.jpg"></a>
+            <a href="{{ url_for('halloween_gift') }}"><img class="img-responsive" src="https://images6.alphacoders.com/736/736528.jpg"></a>
             <div class="producttitle">Halloween</div>
             <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">GO</a></div><div class="pricetext"></div></div>
         </div>
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4 ng-scope column productbox">
-            <a href="#"><img class="img-responsive" src="http://eskipaper.com/images/green-holiday-backgrounds-2.jpg"></a>
+            <a href="{{ url_for('christmas_gift') }}"><img class="img-responsive" src="http://eskipaper.com/images/green-holiday-backgrounds-2.jpg"></a>
             <div class="producttitle">Christmas</div>
             <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">GO</a></div><div class="pricetext"></div></div>
         </div>
