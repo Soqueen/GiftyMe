@@ -26,11 +26,11 @@ def get_new_token():
     headers = {
                'Content-Type':'application/x-www-form-urlencoded'
                }
-              
+
     payload = "client_id=UZESkK5v7Q6H7i580D1U7Ye8k6zoNhK7&client_secret=LU9kNT0qs79FzZRx&responce_type=token&scope=hybris.tenant%3Dconuhack2017%20hybris.pubsub.topic%3Dhybris.category.assignment-created%20hybris.pubsub.topic%3Dhybris.customer.customer-signup%20hybris.cart_manage%20hybris.checkout_manage%20hybris.pubsub.topic%3Dhybris.checkout.checkout-failure%20hybris.customer_read%20hybris.customer_update%20hybris.customer_create%20hybris.customer_view_profile%20hybris.customer_edit_profile%20hybris.pubsub.topic%3Dhybris.customer.password-reset-requested%20hybris.pubsub.topic%3Dhybris.customer.password-updated%20hybris.pubsub.topic%3Dhybris.customer.customer-oauth-logout%20hybris.pubsub.topic%3Dhybris.customer.customer-oauth-login%20hybris.pubsub.topic%3Dhybris.customer.customer-login%20hybris.pubsub.topic%3Dhybris.customer.customer-logout%20hybris.pubsub.topic%3Dhybris.customer.customer-updated%20hybris.pubsub.topic%3Dhybris.customer.address-created%20hybris.pubsub.topic%3Dhybris.customer.address-updated%20hybris.pubsub.topic%3Dhybris.customer.address-deleted%20hybris.pubsub.topic%3Dhybris.customer.address-tag-added%20hybris.pubsub.topic%3Dhybris.customer.address-tag-deleted%20hybris.pubsub.topic%3Dhybris.customer.customer-account-linked%20hybris.pubsub.topic%3Dhybris.customer.customer-account-unlinked%20hybris.email_view%20hybris.email_manage%20hybris.email_send%20hybris.email_admin%20hybris.order_post%20hybris.order_read%20hybris.order_update%20hybris.order_delete%20hybris.order_view_history%20hybris.order_create%20hybris.pubsub.topic%3Dhybris.order.order-created%20hybris.pubsub.topic%3Dhybris.order.order-status-changed%20hybris.pubsub.topic%3Dhybris.order.order-updated%20hybris.order_update_as_customer%20hybris.schema_manage%20hybris.schema_view%20hybris.schema_admin%20hybris.document_view%20hybris.document_manage%20hybris.document_admin%20hybris.configuration_view%20hybris.configuration_manage%20hybris.configuration_admin%20hybris.price_manage%20hybris.price_delete_all%20hybris.pubsub.topic%3Dhybris.price.price-change%20hybris.pubsub.topic%3Dhybris.price.price%20hybris.product_create%20hybris.product_update%20hybris.product_read_unpublished%20hybris.product_delete%20hybris.product_publish%20hybris.product_unpublish%20hybris.pubsub.topic%3Dhybris.product.product-created%20hybris.pubsub.topic%3Dhybris.product.product-updated%20hybris.pubsub.topic%3Dhybris.product.product-deleted%20hybris.product_delete_all%20hybris.pubsub.topic%3Dhybris.product.all-products-deleted%20hybris.product_migrate%20hybris.search-algolia_read%20hybris.search-algolia_manage%20hybris.search-algolia_index%20hybris.category_read_unpublished%20hybris.category_create%20hybris.category_update%20hybris.category_delete%20hybris.category_publish%20hybris.category_unpublish%20hybris.pubsub.topic%3Dhybris.category.assignments-deleted%20hybris.pubsub.topic%3Dhybris.category.category-deleted%20hybris.pubsub.topic%3Dhybris.category.category-updated%20hybris.pubsub.topic%3Dhybris.category.category-created%20hybris.category_delete_all%20hybris.pubsub.topic%3Dhybris.category.all-categories-deleted%20hybris.pcm_manage%20hybris.pcm_read%20hybris.org_manage%20hybris.org_view%20hybris.org_project_create%20hybris.org_payment%20hybris.org_members%20sap.subscription_provider_view%20sap.bill_view%20sap.invoicerequest_manage%20hybris.org_project_manage%20hybris.account_view%20hybris.account_manage%20hybris.marketplace_subscribe%20sap.subscription_provider_terminate%20hybris.marketplace_submit%20sap.subscription_cancel%20sap.subscription_manage%20hybris.api_manage%20hybris.api_view%20hybris.blocks_view%20hybris.package_view%20hybris.package_manage%20hybris.package_rateplanview%20hybris.package_rateplanmanage%20hybris.market_subscriptions_view%20hybris.market_subscriptions_manage&grant_type=client_credentials"
     r = requests.request("POST", url, data=payload, headers=headers)
     jr=r.json()
-    return ('Bearer '+jr['access_token'])
+    return ('Bearer '+ jr['access_token'])
 
 def request_error(responce):
     # token expired
@@ -40,8 +40,8 @@ def request_error(responce):
         print("401 error, new token generated: "+TOKEN)
         return -1
     return 0
-        
-def get_service(service, request_type, **params):
+
+def get_service(service, **params):
     """
     Request different services to YAAS api
     :param token:
@@ -102,10 +102,10 @@ def get_service(service, request_type, **params):
         r = requests.get(url=url,headers=headers)
     #  2.  Get a single product*
     elif service == 'getOneProduct':
-        url = BASE_URL+'/product'+'/v2/'+TENANT+'/products'+ ??product id 
+        url = BASE_URL+'/product'+'/v2/'+TENANT+'/products'+ ??product id
         headers = {"Authorization": TOKEN, "Accept-Language": "pl", "hybris-languages": "en","Content-Type":"application/json"}
         r = requests.get(url=url,headers=headers)
-    
+
     #  3.  Get all prices*
     #  4.  Get single price*
     #  5.  Create a specific order* (admin)
@@ -157,19 +157,19 @@ def get_service(service, request_type, **params):
 #     elif request_type == 'post':
 #         r = requests.post(url=url, data=json.dump(data), headers=header)
     # 21 get all customers
+
     elif service == 'getAllCustomer':
         url = BASE_URL+'/customer/v1/'+TENANT+'/customers'
         headers = {"Authorization": TOKEN,"Content-Type":"application/json"}
         r = requests.request("GET", url, headers=headers)
     
-    
     status = request_error(r)
-    # -1 : token expire error 
-    ####################### RISKY OF INFINITE LOOP ##########################3 
-    if status==-1:
-        get_service(token, service, token_exp_time, request_type, **params)
-    
+    # -1 : token expire error
+    ####################### RISKY OF INFINITE LOOP ##########################3
+    # if status==-1:
+    #     get_service(token, service, token_exp_time, request_type, **params)
+
     return r.json()
 
-    
+
 

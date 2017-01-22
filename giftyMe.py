@@ -5,6 +5,7 @@ from flask import flash, Flask, jsonify, redirect, request, render_template
 from flask_socketio import SocketIO
 # from time import gmtime, strftime
 # from urllib import *
+from requestService import get_service
 
 app = Flask(__name__)
 app.secret_key = "GiftMe"
@@ -28,7 +29,10 @@ def login():
 def login_form():
     email = request.form['email']
     pwd = request.form['pwd']
-    # TODO- CALL API FOR VERIFY THE LOGIN
+    data = {'email': email, 'password': pwd}
+    result = get_service('login', data)
+    if result != False:
+        return render_template('profile.html')
     return render_template('/')
 
 
@@ -44,11 +48,13 @@ def register_form():
     conf_pwd = request.form['conf_pwd']
     firstName = request.form['firstname']
     lastName = request.form['lastname']
-    # if conf_pwd != pwd:
-    #     flash(u'Your passwords do not match!')
-    #     return render_template('register.html')
-    # TODO- CALL API FOR Register the new user
-    return redirect('/')
+    data = {'email': email, 'password': pwd}
+    result = get_service('login', data)
+    if result != False:
+        return render_template('profile.html')
+    return render_template('/')
+
+@app.route()
 
 if __name__ == '__main__':
     socketio.run(app)
