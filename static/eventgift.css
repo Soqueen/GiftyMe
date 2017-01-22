@@ -11,18 +11,6 @@ body {
 	text-align: left;
 }
 
-li a {
-	color: #333;
-}
-
-li a:visited {
-	color: #333;
-}
-
-li a:hover {
-	color: #333;
-}
-
 .sidenav a {
 	color: #fff;
 	text-transform: uppercase;
@@ -80,11 +68,20 @@ h1 {
 	text-align: center;
 }
 
-.dropdown a:visited {
+a:visited {
+	color: #2A363B;
+}
+
+a:hover {
+	color: #2A363B;
+	text-decoration: underline;
+}
+
+.sidenav a:visited {
 	color: #fff;
 }
 
-.dropdown a:hover {
+.sidenav a:hover {
 	color: #fff;
 	text-decoration: underline;
 }
