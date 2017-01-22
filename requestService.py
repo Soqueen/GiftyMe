@@ -14,7 +14,7 @@ CLIENT_ID = 'UZESkK5v7Q6H7i580D1U7Ye8k6zoNhK7'
 CLIENT_SECRET = 'LU9kNT0qs79FzZRx'
 SUCCESS_CODE = [200, 201]
 global TOKEN
-TOKEN = "Bearer 022-203cba1d-bcc1-4503-ba40-0bd2f4843a9e"
+TOKEN = "Bearer 022-1716e75a-9b08-4012-aadb-03bc4504fd3b"
 SERVICE_LIST = ['postProduct','getAllProduct','getOneProduct','signUp','login','logout','getAllCustomer','postPrice','getPrice','postCart','deleteCart','fillCart','getItemInCart']
 
 def token_verify(token):
@@ -139,8 +139,8 @@ def get_service(service, **params):
     elif service == 'login':
         url = BASE_URL+'/customer/v1/'+TENANT+'/login'
         headers = {"Authorization": TOKEN,"Content-Type":"application/json"}
-        payload = '''{"email":"'''+params['email']+'''","password":"'''+params['password']+'''"}'''
-        r = requests.request("POST", url, data=payload, headers=headers)
+        payload = {"email":params['email'],"password":params['password']}
+        r = requests.request("POST", url, data=json.dumps(payload), headers=headers)
         if r.status_code not in SUCCESS_CODE:
             print('Access denied. Entered credentials are incorrect.')
             return False
@@ -282,12 +282,12 @@ if __name__ == '__main__':
     # example output: {'id': '5882ece1944b32001d36d422', 'media': [{'id': 'bfb861b9-e5f7-47bf-9b6f-74c81bef9356', 'contentType': 'image/jpeg', 'uploadLink': 'https://s3.amazonaws.com/sap.yaas.us.public.media/5882ed7006f5d2001d2e3cac?X-Amz-Security-Token=FQoDYXdzEIb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDAcHPPQ5hWqO%2BfgSFyLLAR01oxtMC6RVGV4sdlWqDegFAKa%2Bb%2FGqMH9AO1J5ZOOVYY6bbOwuR8s1ZrOb%2FrHAccRXiAQGxVX60iUq793S8Oy9SOGXDhaErmSV%2Fsksnwri8ymnpJNE2kO9baXGdY9nXjnIqaL%2BG3Vi8ch3i2f2q71tG5DLaisNC%2BxPV%2BGjwvfk9FE%2FVW40eUvvoJxHvoyvIrQzrN78PAZbUhA0qqvNfe9wA83NSTxsiFFaVONtk0YmDy8M%2FNhx2V%2BmyHYozCFl8Ug9BtEPNULgFqT4KIrZi8QF&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20170121T051112Z&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Expires=3600&X-Amz-Credential=ASIAJRQ2ZC3TXLB5SSYA%2F20170121%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b11ac8b58a6f1fb169e4a5966f69f818c31067bcd76435252b69d9d3f32f514a', 'url': 'https://api.us.yaas.io/hybris/media/v2/public/files/5882ed7006f5d2001d2e3cac', 'createdAt': '2017-01-21T05:11:12.698Z', 'yrn': 'urn:yaas:hybris:product:product-media:conuhack2017;5882ece1944b32001d36d422;bfb861b9-e5f7-47bf-9b6f-74c81bef9356'}], 'mixins': {}, 'description': {}, 'metadata': {'createdAt': '2017-01-21T05:08:49.134+0000', 'variants': {'options': {}, 'mixins': {}}, 'mixins': {}, 'modifiedAt': '2017-01-21T19:02:23.846+0000', 'version': 11}, 'yrn': 'urn:yaas:hybris:product:product:conuhack2017;5882ece1944b32001d36d422', 'published': False, 'name': {}, 'code': '545b4e3dfaee4c10def3db25'}
     # get_service('signUp',email='welovecoding@mcgill.ca',password='123456')
     # example output: {'link': 'https://api.beta.yaas.io/hybris/customer/v1/conuhack2017/me', 'id': 'C5225180381'}
-    r_login = get_service('login',email='welovecoding@mcgill.com',password='123456')
-    print(r_login)
+    r = get_service('login',email='welovecodi@cgill.com',password='123456')
+    print(r)
     # example output: {'accessToken': '021-6a0420b4-afb1-4728-98a6-7920eb373e58'}
     # r_logout = get_service('logout',accessToken=r_login['accessToken'])
     # output: {"text": "Logout succeeded."} 
-    # get_service('getAllCustomer')
+    get_service('getAllCustomer')
     # example output: [{'preferredSite': 'default', 'customerNumber': 'C9119642242', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'noreply@yaastest.com', 'preferredLanguage': 'en_US', 'id': 'C9119642242', 'metadata': {'mixins': {}}}, {'preferredSite': 'default', 'customerNumber': 'C5249747078', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'guanqing.hu@mial.mcgill.ca', 'preferredLanguage': 'en_US', 'id': 'C5249747078', 'metadata': {'mixins': {}}}, {'preferredSite': 'default', 'customerNumber': 'C9126979045', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'guanqing.hu@mail.mcgill.ca', 'preferredLanguage': 'en_US', 'id': 'C9126979045', 'metadata': {'mixins': {}}}, {'preferredSite': 'default', 'customerNumber': 'C5225180381', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'welovecoding@mcgill.ca', 'preferredLanguage': 'en_US', 'id': 'C5225180381', 'metadata': {'mixins': {}}}]
     # get_service('postPrice',productId='bfb861b9-e5f7-47bf-9b6f-74c81bef9356',originalAmount= 99.99,currency="USD")
     # example output: {'id': '58845e57aae4bf001df2cded', 'yrn': 'urn:yaas:hybris:price:price:conuhack2017;58845e57aae4bf001df2cded'}
