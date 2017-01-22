@@ -157,17 +157,6 @@ def get_service(service, request_type, **params):
 #     elif request_type == 'post':
 #         r = requests.post(url=url, data=json.dump(data), headers=header)
     # 21 get all customers
-    url = "https://api.yaas.io/hybris/customer/v1/conuhack2017/customers"
-
-    payload = "{\"email\":\"guanqing.hu@mial.mcgill.ca\",\"password\":\"123123\"}"
-    headers = {
-        'authorization': "Bearer 022-fecba45f-e8ec-4a8d-866d-0ef6f23b8e67",
-        'accept-language': "pl",
-        'hybris-languages': "en",
-        'content-type': "application/json",
-        }
-    response = requests.request("GET", url, data=payload, headers=headers)
-    
     elif service == 'getAllCustomer':
         url = BASE_URL+'/customer/v1/'+TENANT+'/customers'
         headers = {"Authorization": TOKEN,"Content-Type":"application/json"}
