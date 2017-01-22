@@ -24,6 +24,8 @@ def index():
 
 @app.route('/contact')
 def contact():
+    if LOGIN:
+        return render_template('contactprofile.html')
     return render_template('contact.html')
 
 
@@ -36,11 +38,15 @@ def event():
 
 @app.route('/valentine_gift')
 def valentine_gift():
-    return render_template('valentine.html')
+    if LOGIN:
+        return render_template('valentineprofile.html')
 
+    return render_template('valentineprofile.html')
 
 @app.route('/halloween_gift')
 def halloween_gift():
+    if LOGIN:
+        return render_template('halloweenprofile.html')
     return render_template('halloween.html')
 
 
@@ -106,6 +112,17 @@ def logout():
 @app.route('/setting')
 def setting():
     return render_template('settings.html')
+
+@app.route('/pastOrder')
+def pastOrder():
+    return render_template('pastorders.html')
+
+@app.route('/discount')
+def discount():
+    if LOGIN:
+        return render_template('specialdiscountsprofile.html')
+    return render_template('specialdiscounts.html')
+
 if __name__ == '__main__':
     socketio.run(app)
 
