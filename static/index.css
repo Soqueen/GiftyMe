@@ -6,8 +6,9 @@ body {
 	background-color: #fefefe;
 }
 
-.container {
+.container-fluid {
 	color: #2A363B;
+	text-align: left;
 }
 
 .sidenav a {

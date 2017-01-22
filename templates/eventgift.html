@@ -9,7 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='eventgift.css')}}">
-  <!--<link rel="stylesheet" href="../static/eventgift.css"> -->
+  <!-- <link rel="stylesheet" href="../static/eventgift.css"> -->
   <!-- some code from: http://bootsnipp.com/snippets/featured/ecommerce-product-display -->
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
@@ -82,12 +82,12 @@
 
     <div class="col-md-2 sidenav">
       <p><a href="#">Event Gift</a></p>
-      <p><a href="#">Special Discount</a></p>
+      <p><a href="#">Special Discounts</a></p>
       <p><a href="#">New arrival</a></p>
     </div>
 
-    <div class="col-xs-8 col-md-9">
-      <div class="container">
+    <div class="col-xs-8 col-md-8">
+      <div class="container-fluid">
         <h1>Valentine's Day Special Packages</h1>
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Search for...">
@@ -98,7 +98,8 @@
           <!-- <button type="submit" class="btn btn-default">Search</button> -->
 
 
-      <div class="row product-grid ng-isolate-scope" infinite-scroll="addMore()" infinite-scroll-distance="0" infinite-scroll-imeediate-check="false" infinite-scroll-data="pagination" infinite-scroll-visible-items>
+      <!-- <div class="row product-grid ng-isolate-scope" infinite-scroll="addMore()" infinite-scroll-distance="0" infinite-scroll-imeediate-check="false" infinite-scroll-data="pagination" infinite-scroll-visible-items> -->
+
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ng-scope column productbox">
             <img src="http://placehold.it/460x250/e67e22/ffffff&text=HTML5" class="img-responsive">
             <div class="producttitle">Product 1</div>
@@ -119,10 +120,31 @@
             <div class="producttitle">Product 4</div>
             <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$8.95</div></div>
         </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ng-scope column productbox">
+            <img src="http://placehold.it/460x250/e67e22/ffffff&text=HTML5" class="img-responsive">
+            <div class="producttitle">Product 4</div>
+            <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$8.95</div></div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ng-scope column productbox">
+            <img src="http://placehold.it/460x250/e67e22/ffffff&text=HTML5" class="img-responsive">
+            <div class="producttitle">Product 4</div>
+            <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$8.95</div></div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ng-scope column productbox">
+            <img src="http://placehold.it/460x250/e67e22/ffffff&text=HTML5" class="img-responsive">
+            <div class="producttitle">Product 4</div>
+            <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$8.95</div></div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 ng-scope column productbox">
+            <img src="http://placehold.it/460x250/e67e22/ffffff&text=HTML5" class="img-responsive">
+            <div class="producttitle">Product 4</div>
+            <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$8.95</div></div>
+        </div>
         <button type="button" id="to-top-btn" ng-click="backToTop()" class="btn btn-link back-to-top-button pull-left menu">
           <span class="hyicon hyicon-cheveron-bold-up"></span>
         </button>
-      </div>
+
+      <!--</div>-->
       </div>
     </div>
   </div>
