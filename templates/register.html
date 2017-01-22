@@ -80,13 +80,27 @@
   <div class="row content">
 
     <div class="col-md-2 sidenav">
-      <p><a href="#">Event Gift</a></p>
-      <p><a href="#">Special Discount</a></p>
-      <p><a href="#">New arrival</a></p>
+      <!-- <p><a href="#">Event Gift</a></p>
+      <p><a href="#">Special Discounts</a></p>
+      <p><a href="#">New arrival</a></p> -->
+      <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Event Gift</a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <p><a class="dropdown-item" href="#" style="color:black">A</a></p>
+        <p><a class="dropdown-item" href="#" style="color:black">B</a></p>
+        <p><a class="dropdown-item" href="#" style="color:black">C</a></p>
+        </div>
+      </div>
+      <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Special Discounts</a>
+      </div>
+      <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">New Arrival</a>
+      </div>
     </div>
 
-    <div class="col-xs-8 col-md-9">
-      <div class="container">
+    <div class="col-xs-8 col-md-8">
+      <div class="container-fluid">
         <h1>Create An Account</h1>
         <form method="POST" action="/signUp">
           <div class="form-group">

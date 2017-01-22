@@ -6,7 +6,7 @@ body {
 	background-color: #fefefe;
 }
 
-.container {
+.container-fluid {
 	color: #2A363B;
 	text-align: left;
 }
@@ -62,4 +62,17 @@ h1 {
 .pricetext {
 	font-weight:bold;
 	font-size:1.4em;
+}
+
+.dropdown-item {
+	text-align: center;
+}
+
+.dropdown a:visited {
+	color: #fff;
+}
+
+.dropdown a:hover {
+	color: #fff;
+	text-decoration: underline;
 }

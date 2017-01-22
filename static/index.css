@@ -6,11 +6,25 @@ body {
 	background-color: #fefefe;
 }
 
-.container {
+.container-fluid {
 	color: #2A363B;
+	text-align: left;
 }
 
 .sidenav a {
 	color: #fff;
 	text-transform: uppercase;
+}
+
+.dropdown-item {
+	text-align: center;
+}
+
+.dropdown a:visited {
+	color: #fff;
+}
+
+.dropdown a:hover {
+	color: #fff;
+	text-decoration: underline;
 }
