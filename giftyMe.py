@@ -62,6 +62,8 @@ def login_form():
     if result != False:
         global LOGIN
         LOGIN = True
+        global CUSTOMER_TOKEN
+        CUSTOMER_TOKEN = result['accessToken']
         return render_template('indexprofile.html')
     return render_template('/')
 
@@ -93,11 +95,15 @@ def register_form():
 
 @app.route('/logout')
 def logout():
+
     result = get_service('logout', accessToken=CUSTOMER_TOKEN)
     if result != False:
         return render_template('index.html')
 
 
+@app.route('/setting')
+def setting():
+    return render_template('setting.html')
 if __name__ == '__main__':
     socketio.run(app)
 
