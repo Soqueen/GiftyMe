@@ -14,8 +14,8 @@ CLIENT_ID = 'UZESkK5v7Q6H7i580D1U7Ye8k6zoNhK7'
 CLIENT_SECRET = 'LU9kNT0qs79FzZRx'
 SUCCESS_CODE = [200, 201]
 global TOKEN
-TOKEN = "Bearer 021-dd0e53b0-6063-47ab-a861-5414c9d626c7"
-SERVICE_LIST = ['postProduct','getAllProduct','getOneProduct','signUp','login','getAllCustomer']
+TOKEN = "Bearer 022-55acf70f-2f2c-4a36-baa2-d81a17b2946b"
+SERVICE_LIST = ['postProduct','getAllProduct','getOneProduct','signUp','login','logout','getAllCustomer','postPrice','getPrice']
 
 def token_verify(token):
     # do a GET to check if it throws token error
@@ -109,8 +109,7 @@ def get_service(service, **params):
        headers = {"Authorization": TOKEN, "Accept-Language": "pl", "hybris-languages": "en","Content-Type":"application/json"}
        r = requests.get(url=url,headers=headers)
     
-    #  3.  Get all prices*
-    #  4.  Get single price*
+    
     #  5.  Create a specific order* (admin)
     #  6.  Retrieve a specific Order* (admin)
     #  7.  Create a order * (customer)
@@ -134,11 +133,8 @@ def get_service(service, **params):
         r = requests.post(url=url, headers=headers,data=payload)
         # r.json example: {"id":"C9577975961","link":"https://api.yaas.io/hybris/customer/v1/bsdqa/me"}
     #  15. Reset password for customer *
-
     #  16. Reset-Update password for customer*
-
     #  17. Change password for customer
-
     #  18. Customer login*
     elif service == 'login':
         url = BASE_URL+'/customer/v1/'+TENANT+'/login'
@@ -146,7 +142,11 @@ def get_service(service, **params):
         payload = '''{"email":"'''+params['email']+'''","password":"'''+params['password']+'''"}'''
         r = requests.request("POST", url, data=payload, headers=headers)
     #  19. Customer logout *
-
+    elif service == 'logout':
+        url = BASE_URL+'/customer/v1/'+TENANT+'/logout?accessToken='+params['accessToken']
+        headers = {"Authorization": TOKEN,"Content-Type":"application/json"}
+        r = requests.request("GET", url, headers=headers)
+        
     ## 20. persistence??
 
 #     if request_type == 'get':
@@ -164,17 +164,45 @@ def get_service(service, **params):
         url = BASE_URL+'/customer/v1/'+TENANT+'/customers'
         headers = {"Authorization": TOKEN,"Content-Type":"application/json"}
         r = requests.request("GET", url, headers=headers)  
-             
+           
+    #  3.  Get all prices*
+    #  4.  Get single price*
+    #  22. POST price for one product
+    # example of params: {"productId": "53a358901b2e9dd2718b5c4e","originalAmount": 99.99,"currency": "USD",
+                #"dateRange": {"startDate": "2015-01-23T22:00:00+0000","endDate": "2015-03-31T23:00:00+0000"},
+                #"salePrice": {"discountRate": 20,"description": "20% OFF, Amazing!"},
+                #"wholesale": {"minQuantity": 2,"maxQuantity": 10}}
+    elif service == 'postPrice':
+        url = BASE_URL+'/price/v1/'+TENANT+'/prices'
+        payload = params
+        headers = {
+                    'authorization': TOKEN,
+                    'content-type': "application/json",
+                    }
+        r = requests.request("POST", url, data=json.dumps(payload), headers=headers)
+    elif service == 'getPrice':
+        url = BASE_URL+'/price/v1/'+TENANT+'/prices'
+        headers = {
+                    'authorization': TOKEN,
+                    'content-type': "application/json",
+                    }
+        r = requests.request("GET", url, headers=headers)
+        
     
     if r.status_code in SUCCESS_CODE:
         print("SUCCEED")
         print(r.json())
         return r.json()
+    if r.status_code == 204:
+        return json.dumps({"text":"Logout succeeded."})
     print("FAILED")
-    print(r.json())
+    try: 
+        print(r.json())
+    except:
+        print(r)
     return False
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # get_service('postProduct', name="apple1",code="apple4",description="da la da da da",published="true")
     # example output: {'id': '5884339e6da68b001d6e01e4', 'yrn': 'urn:yaas:hybris:product:product:conuhack2017;5884339e6da68b001d6e01e4', 'link': 'https://api.beta.yaas.io/hybris/product/v2/conuhack2017/products/5884339e6da68b001d6e01e4'} 
     # get_service('getAllProduct')
@@ -183,11 +211,19 @@ def get_service(service, **params):
     # example output: {'id': '5882ece1944b32001d36d422', 'media': [{'id': 'bfb861b9-e5f7-47bf-9b6f-74c81bef9356', 'contentType': 'image/jpeg', 'uploadLink': 'https://s3.amazonaws.com/sap.yaas.us.public.media/5882ed7006f5d2001d2e3cac?X-Amz-Security-Token=FQoDYXdzEIb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaDAcHPPQ5hWqO%2BfgSFyLLAR01oxtMC6RVGV4sdlWqDegFAKa%2Bb%2FGqMH9AO1J5ZOOVYY6bbOwuR8s1ZrOb%2FrHAccRXiAQGxVX60iUq793S8Oy9SOGXDhaErmSV%2Fsksnwri8ymnpJNE2kO9baXGdY9nXjnIqaL%2BG3Vi8ch3i2f2q71tG5DLaisNC%2BxPV%2BGjwvfk9FE%2FVW40eUvvoJxHvoyvIrQzrN78PAZbUhA0qqvNfe9wA83NSTxsiFFaVONtk0YmDy8M%2FNhx2V%2BmyHYozCFl8Ug9BtEPNULgFqT4KIrZi8QF&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20170121T051112Z&X-Amz-SignedHeaders=content-type%3Bhost&X-Amz-Expires=3600&X-Amz-Credential=ASIAJRQ2ZC3TXLB5SSYA%2F20170121%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=b11ac8b58a6f1fb169e4a5966f69f818c31067bcd76435252b69d9d3f32f514a', 'url': 'https://api.us.yaas.io/hybris/media/v2/public/files/5882ed7006f5d2001d2e3cac', 'createdAt': '2017-01-21T05:11:12.698Z', 'yrn': 'urn:yaas:hybris:product:product-media:conuhack2017;5882ece1944b32001d36d422;bfb861b9-e5f7-47bf-9b6f-74c81bef9356'}], 'mixins': {}, 'description': {}, 'metadata': {'createdAt': '2017-01-21T05:08:49.134+0000', 'variants': {'options': {}, 'mixins': {}}, 'mixins': {}, 'modifiedAt': '2017-01-21T19:02:23.846+0000', 'version': 11}, 'yrn': 'urn:yaas:hybris:product:product:conuhack2017;5882ece1944b32001d36d422', 'published': False, 'name': {}, 'code': '545b4e3dfaee4c10def3db25'}
     # get_service('signUp',email='welovecoding@mcgill.ca',password='123456')
     # example output: {'link': 'https://api.beta.yaas.io/hybris/customer/v1/conuhack2017/me', 'id': 'C5225180381'}
-    # get_service('login',email='welovecoding@mcgill.ca',password='123456')
+    # r_login = get_service('login',email='welovecoding@mcgill.ca',password='123456')
     # example output: {'accessToken': '021-6a0420b4-afb1-4728-98a6-7920eb373e58'}
+    # r_logout = get_service('logout',accessToken=r_login['accessToken'])
+    # output: {"text": "Logout succeeded."} 
     # get_service('getAllCustomer')
     # example output: [{'preferredSite': 'default', 'customerNumber': 'C9119642242', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'noreply@yaastest.com', 'preferredLanguage': 'en_US', 'id': 'C9119642242', 'metadata': {'mixins': {}}}, {'preferredSite': 'default', 'customerNumber': 'C5249747078', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'guanqing.hu@mial.mcgill.ca', 'preferredLanguage': 'en_US', 'id': 'C5249747078', 'metadata': {'mixins': {}}}, {'preferredSite': 'default', 'customerNumber': 'C9126979045', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'guanqing.hu@mail.mcgill.ca', 'preferredLanguage': 'en_US', 'id': 'C9126979045', 'metadata': {'mixins': {}}}, {'preferredSite': 'default', 'customerNumber': 'C5225180381', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'welovecoding@mcgill.ca', 'preferredLanguage': 'en_US', 'id': 'C5225180381', 'metadata': {'mixins': {}}}]
-    # print('finished')
+    # get_service('postPrice',productId='bfb861b9-e5f7-47bf-9b6f-74c81bef9356',originalAmount= 99.99,currency="USD")
+    # example output: {'id': '58845e57aae4bf001df2cded', 'yrn': 'urn:yaas:hybris:price:price:conuhack2017;58845e57aae4bf001df2cded'}
+    # get_service('getPrice')
+    # example output: {'effectiveAmount': 45.0, 'productId': '5882ece1944b32001d36d422',  
+                #'priceId': '5882ece1aae4bf001df2c9e4', 'originalAmount': 45.0, 
+                #'yrn': 'urn:yaas:hybris:price:price:conuhack2017;5882ece1aae4bf001df2c9e4', 'currency': 'USD'}                                                                             
+    print('finished')
     
     
     
