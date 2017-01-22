@@ -42,3 +42,16 @@ form {
 	border-radius: 0px;
 	outline: 0!important;
 }
+
+.dropdown-item {
+	text-align: center;
+}
+
+.dropdown a:visited {
+	color: #fff;
+}
+
+.dropdown a:hover {
+	color: #fff;
+	text-decoration: underline;
+}

@@ -63,3 +63,16 @@ h1 {
 	font-weight:bold;
 	font-size:1.4em;
 }
+
+.dropdown-item {
+	text-align: center;
+}
+
+.dropdown a:visited {
+	color: #fff;
+}
+
+.dropdown a:hover {
+	color: #fff;
+	text-decoration: underline;
+}
