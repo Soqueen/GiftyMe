@@ -141,7 +141,7 @@ def get_service(service, **params):
         headers = {"Authorization": TOKEN,"Content-Type":"application/json"}
         payload = '''{"email":"'''+params['email']+'''","password":"'''+params['password']+'''"}'''
         r = requests.request("POST", url, data=payload, headers=headers)
-        if r.status_code == 401:
+        if r.status_code not in SUCCESS_CODE:
             print('Access denied. Entered credentials are incorrect.')
             return False
     #  19. Customer logout *
