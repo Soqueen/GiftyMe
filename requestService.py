@@ -14,8 +14,8 @@ CLIENT_ID = 'UZESkK5v7Q6H7i580D1U7Ye8k6zoNhK7'
 CLIENT_SECRET = 'LU9kNT0qs79FzZRx'
 SUCCESS_CODE = [200, 201]
 global TOKEN
-TOKEN = "Bearer 022-55acf70f-2f2c-4a36-baa2-d81a17b2946b"
-SERVICE_LIST = ['postProduct','getAllProduct','getOneProduct','signUp','login','logout','getAllCustomer','postPrice','getPrice']
+TOKEN = "Bearer 021-e5023535-dbbd-49ca-883e-7045b59cebf4"
+SERVICE_LIST = ['postProduct','getAllProduct','getOneProduct','signUp','login','logout','getAllCustomer','postPrice','getPrice','postCart','deleteCart']
 
 def token_verify(token):
     # do a GET to check if it throws token error
@@ -189,14 +189,32 @@ def get_service(service, **params):
                     'content-type': "application/json",
                     }
         r = requests.request("GET", url, headers=headers)
+    # 23. create cart
+    elif service == 'postCart':
+        url = BASE_URL+'/cart/v1/'+TENANT+'/carts'
+        payload = {"customerId": params['customerId'],"currency": "CAD","siteCode": "Canada","channel": {"name": "Pinterest","source": "http://pinterest.com/pin/1/te/2/rest/3" }}
+        headers = {
+                    'authorization': "Bearer 021-e5023535-dbbd-49ca-883e-7045b59cebf4",
+                    'accept-language': "pl",
+                    'hybris-languages': "en",
+                    'content-type': "application/json",
+                    'hybris-session-id': "session0001"
+                    }
+        r = requests.request("POST", url, data=json.dumps(payload), headers=headers)    
+    # 24. delete cart
+    elif service == 'deleteCart':
+        url = BASE_URL+'/cart/v1/'+TENANT+'/carts/'+params['cartId']
+        headers = {
+                    'authorization': "Bearer 021-e5023535-dbbd-49ca-883e-7045b59cebf4",
+                    }
+        r = requests.request("DELETE", url, headers=headers)
         
-    
     if r.status_code in SUCCESS_CODE:
         print("SUCCEED")
         print(r.json())
         return r.json()
     if r.status_code == 204:
-        return json.dumps({"text":"Logout succeeded."})
+        return json.dumps({"text":"Logout/Delete succeeded."})
     print("FAILED")
     try: 
         print(r.json())
@@ -225,6 +243,11 @@ def get_service(service, **params):
     # example output: {'effectiveAmount': 45.0, 'productId': '5882ece1944b32001d36d422',  
                 #'priceId': '5882ece1aae4bf001df2c9e4', 'originalAmount': 45.0, 
                 #'yrn': 'urn:yaas:hybris:price:price:conuhack2017;5882ece1aae4bf001df2c9e4', 'currency': 'USD'}                                                                             
+    # cart = get_service('postCart',customerId='C9119642242')
+    # output: {"cartId": "5884b910944b32001d36d94d","yrn": "urn:yaas:hybris:cart:cart:conuhack2017;5884b910944b32001d36d94d"}
+    # get_service('deleteCart',cartId= cart['cartId'])
+    # output: {"text": "Logout/Delete succeeded."}
+    #get_service('')
     #print('finished')
     
     
