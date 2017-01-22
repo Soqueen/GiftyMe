@@ -5,6 +5,7 @@ from flask import flash, Flask, jsonify, redirect, request, render_template
 from flask_socketio import SocketIO
 # from time import gmtime, strftime
 # from urllib import *
+from requestService import get_service
 
 app = Flask(__name__)
 app.secret_key = "GiftMe"
@@ -28,7 +29,10 @@ def login():
 def login_form():
     email = request.form['email']
     pwd = request.form['pwd']
-    # TODO- CALL API FOR VERIFY THE LOGIN
+    data = {'email': email, 'password': pwd}
+    result = get_service('login', data)
+    if result != False:
+        return render_template('profile.html')
     return render_template('/')
 
 
@@ -44,11 +48,43 @@ def register_form():
     conf_pwd = request.form['conf_pwd']
     firstName = request.form['firstname']
     lastName = request.form['lastname']
-    # if conf_pwd != pwd:
-    #     flash(u'Your passwords do not match!')
-    #     return render_template('register.html')
-    # TODO- CALL API FOR Register the new user
-    return redirect('/')
+    data = {'email': email, 'password': pwd}
+    result = get_service('login', data)
+    if result != False:
+        return render_template('profile.html')
+    return render_template('/')
+
+@app.route('/valProduct')
+def valProduct():
+    result = get_service('getAllProduct')
+    valGold_id = result['id']
+    valGold_name = result['name']
+    valSilver_id = result['id']
+    valSilver_name = result['name']
+    valBronze_id = result['id']
+    valBronze_name = result['name']
+    # TODO -PLACE
+    # return render_template('eventgift.html', gpkg = , 'Love Silver Package', 'Love Si'] )
+
+@app.route('/christmasProduct')
+def valProduct():
+    result = get_service('getAllProduct')
+    chmassGold_id = result['id']
+    chmassGold_name = result['name']
+    chmassSilver_id = result['id']
+    chmassSilver_name = result['name']
+    chmassBronze_id = result['id']
+    chmassBronze_name = result['name']
+
+@app.route('/halloweenProduct')
+def valProduct():
+    result = get_service('getAllProduct')
+    halGold_id = result['id']
+    halGold_name = result['name']
+    halSilver_id = result['id']
+    halSilver_name = result['name']
+    halBronze_id = result['id']
+    halBronze_name = result['name']
 
 if __name__ == '__main__':
     socketio.run(app)
