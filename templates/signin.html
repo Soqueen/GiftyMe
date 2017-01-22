@@ -76,27 +76,12 @@
   <div class="row content">
 
     <div class="col-md-2 sidenav">
-      <!-- <p><a href="#">Event Gift</a></p>
+      <p><a href="{{ url_for('event') }}">Event Gift</a></p>
       <p><a href="#">Special Discounts</a></p>
-      <p><a href="#">New arrival</a></p> -->
-      <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Event Gift</a>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <p><a class="dropdown-item" href="#" style="color:black">Valentine's Day</a></p>
-        <p><a class="dropdown-item" href="#" style="color:black">Halloween</a></p>
-        <p><a class="dropdown-item" href="#" style="color:black">Christmas</a></p>
-        </div>
-      </div>
-      <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Special Discounts</a>
-      </div>
-      <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">New Arrival</a>
-      </div>
-      <div class="dropdown show">
-        <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contact Us</a>
-      </div>
+      <p><a href="#">New arrival</a></p>
+      <p><a href="{{ url_for('contact') }}">Contact Us</a></p>
     </div>
+
 
     <div class="col-xs-8 col-md-8">
       <div class="container-fluid">

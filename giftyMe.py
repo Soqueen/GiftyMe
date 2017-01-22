@@ -11,13 +11,41 @@ app = Flask(__name__)
 app.secret_key = "GiftMe"
 app.config.from_object(__name__)
 socketio = SocketIO(app)
-
-
+LOGIN = False
 
 @app.route('/')
 def index():
     print('Navigate in Home Page')
+    if LOGIN:
+        return render_template('indexprofile.html')
     return render_template('index.html')
+
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html')
+
+
+@app.route('/event')
+def event():
+    if LOGIN:
+        return render_template('eventgiftprofile.html')
+    return render_template('eventgift.html')
+
+
+@app.route('/valentine_gift')
+def valentine_gift():
+    return render_template('valentine.html')
+
+
+@app.route('/halloween_gift')
+def halloween_gift():
+    return render_template('halloween.html')
+
+
+@app.route('/christmas_gift')
+def christmas_gift():
+    return render_template('christmas.html')
 
 
 @app.route('/login')
@@ -32,7 +60,10 @@ def login_form():
     data = {'email': email, 'password': pwd}
     result = get_service('login', data)
     if result != False:
-        return render_template('profile.html')
+        global LOGIN
+        LOGIN = True
+        return render_template('indexprofile.html')
+
     return render_template('/')
 
 
@@ -51,40 +82,12 @@ def register_form():
     data = {'email': email, 'password': pwd}
     result = get_service('login', data)
     if result != False:
-        return render_template('profile.html')
+        global LOGIN
+        LOGIN = True
+        return render_template('indexprofile.html')
     return render_template('/')
 
-@app.route('/valProduct')
-def valProduct():
-    result = get_service('getAllProduct')
-    valGold_id = result['id']
-    valGold_name = result['name']
-    valSilver_id = result['id']
-    valSilver_name = result['name']
-    valBronze_id = result['id']
-    valBronze_name = result['name']
-    # TODO -PLACE
-    # return render_template('eventgift.html', gpkg = , 'Love Silver Package', 'Love Si'] )
 
-@app.route('/christmasProduct')
-def valProduct():
-    result = get_service('getAllProduct')
-    chmassGold_id = result['id']
-    chmassGold_name = result['name']
-    chmassSilver_id = result['id']
-    chmassSilver_name = result['name']
-    chmassBronze_id = result['id']
-    chmassBronze_name = result['name']
-
-@app.route('/halloweenProduct')
-def valProduct():
-    result = get_service('getAllProduct')
-    halGold_id = result['id']
-    halGold_name = result['name']
-    halSilver_id = result['id']
-    halSilver_name = result['name']
-    halBronze_id = result['id']
-    halBronze_name = result['name']
 
 if __name__ == '__main__':
     socketio.run(app)

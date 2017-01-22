@@ -8,8 +8,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='register.css')}}">
-  <link rel="stylesheet" href="../static/register.css">
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='index.css')}}">
+  <link rel="stylesheet" href="../static/index.css">
   <style>
     /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
@@ -20,7 +20,7 @@
     /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
     .row.content {height: 600px}
 
-    /* Set background color and 100% height */
+    /* Set gray background color and 100% height */
     .sidenav {
       padding-top: 20px;
       background-color: #27394f;
@@ -57,13 +57,14 @@
       <a class="navbar-brand" href="#">Logo</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
+
       <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Login
+            <a class="dropdown-toggle" data-toggle="dropdown">Login
             <span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="{{ url_for('login') }}">Sign In</a></li>
-                <li><a href="{{ url_for('register') }}">Register</a></li>
+              <li><a href="{{ url_for('login') }}">Sign In</a></li>
+              <li><a href="{{ url_for('register') }}">Register</a></li>
             </ul>
           </li>
       </ul>
@@ -73,45 +74,17 @@
 
 <div class="container-fluid text-center">
   <div class="row content">
-    <div class="col-md-2 sidenav">
-      <p><a href="{{ url_for('event') }}">Event Gift</a></p>
-      <p><a href="#">Special Discounts</a></p>
-      <p><a href="#">New arrival</a></p>
-      <p><a href="{{ url_for('contact') }}">Contact Us</a></p>
-    </div>
-
-    <div class="col-xs-8 col-md-8">
-      <div class="container-fluid">
-        <h1>Create An Account</h1>
-        <form method="POST" action="/signUp">
-          <div class="form-group">
-            <label >First Name:</label>
-            <input type="text" class="form-control" name="firstname" placeholder="Enter First Name">
-          </div>
-          <div class="form-group">
-            <label >Last Name:</label>
-            <input type="text" class="form-control" name="lastname" placeholder="Enter Last Name">
-          </div>
-          <div class="form-group">
-            <label>Email:</label>
-            <input type="email" class="form-control" name="email" placeholder="Enter email">
-          </div>
-          <div class="form-group">
-            <label>Password:</label>
-            <input type="password" class="form-control" name="pwd" placeholder="Enter password">
-          </div>
-          <div class="form-group">
-            <label>Confirm Password:</label>
-            <input type="password" class="form-control" name="conf_pwd" placeholder="Enter password again">
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        </form>
+      <div class="col-md-2 sidenav">
+          <p><a href="{{ url_for('event') }}">Event Gift</a></p>
+          <p><a href="#">Special Discounts</a></p>
+          <p><a href="#">Pass Order</a></p>
+          <p><a href="#">New arrival</a></p>
+          <p><a href="{{ url_for('contact') }}">Contact Us</a></p>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
-
 
 </body>
 </html>
