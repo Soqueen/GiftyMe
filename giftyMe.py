@@ -57,13 +57,12 @@ def login():
 def login_form():
     email = request.form['email']
     pwd = request.form['pwd']
-    data = {'email': email, 'password': pwd}
-    result = get_service('login', data)
+    result = get_service('login', email=email, password=pwd)
     if result != False:
+
         global LOGIN
         LOGIN = True
         return render_template('indexprofile.html')
-
     return render_template('/')
 
 
@@ -79,14 +78,13 @@ def register_form():
     conf_pwd = request.form['conf_pwd']
     firstName = request.form['firstname']
     lastName = request.form['lastname']
-    data = {'email': email, 'password': pwd}
-    result = get_service('login', data)
+    result = get_service('signUp',  email=email, password=pwd)
     if result != False:
+        print(result)
         global LOGIN
         LOGIN = True
         return render_template('indexprofile.html')
     return render_template('/')
-
 
 
 if __name__ == '__main__':
