@@ -208,7 +208,7 @@ def get_service(service, **params):
                     'authorization': "Bearer 021-e5023535-dbbd-49ca-883e-7045b59cebf4",
                     }
         r = requests.request("DELETE", url, headers=headers)
-        
+    # 25.     
     if r.status_code in SUCCESS_CODE:
         print("SUCCEED")
         print(r.json())
@@ -216,10 +216,6 @@ def get_service(service, **params):
     if r.status_code == 204:
         return json.dumps({"text":"Logout/Delete succeeded."})
     print("FAILED")
-    try: 
-        print(r.json())
-    except:
-        print(r)
     return False
 
 #if __name__ == '__main__':
@@ -239,7 +235,7 @@ def get_service(service, **params):
     # example output: [{'preferredSite': 'default', 'customerNumber': 'C9119642242', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'noreply@yaastest.com', 'preferredLanguage': 'en_US', 'id': 'C9119642242', 'metadata': {'mixins': {}}}, {'preferredSite': 'default', 'customerNumber': 'C5249747078', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'guanqing.hu@mial.mcgill.ca', 'preferredLanguage': 'en_US', 'id': 'C5249747078', 'metadata': {'mixins': {}}}, {'preferredSite': 'default', 'customerNumber': 'C9126979045', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'guanqing.hu@mail.mcgill.ca', 'preferredLanguage': 'en_US', 'id': 'C9126979045', 'metadata': {'mixins': {}}}, {'preferredSite': 'default', 'customerNumber': 'C5225180381', 'preferredCurrency': 'USD', 'active': True, 'contactEmail': 'welovecoding@mcgill.ca', 'preferredLanguage': 'en_US', 'id': 'C5225180381', 'metadata': {'mixins': {}}}]
     # get_service('postPrice',productId='bfb861b9-e5f7-47bf-9b6f-74c81bef9356',originalAmount= 99.99,currency="USD")
     # example output: {'id': '58845e57aae4bf001df2cded', 'yrn': 'urn:yaas:hybris:price:price:conuhack2017;58845e57aae4bf001df2cded'}
-    # get_service('getPrice')
+    #get_service('getPrice')
     # example output: {'effectiveAmount': 45.0, 'productId': '5882ece1944b32001d36d422',  
                 #'priceId': '5882ece1aae4bf001df2c9e4', 'originalAmount': 45.0, 
                 #'yrn': 'urn:yaas:hybris:price:price:conuhack2017;5882ece1aae4bf001df2c9e4', 'currency': 'USD'}                                                                             
