@@ -30,6 +30,7 @@ def login_form():
     # TODO- CALL API FOR VERIFY THE LOGIN
     return render_template('index.html')
 
+
 @app.route('/register')
 def register():
     return render_template('register.html')
