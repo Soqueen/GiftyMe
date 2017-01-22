@@ -95,10 +95,12 @@ def register_form():
 
 @app.route('/logout')
 def logout():
-
     result = get_service('logout', accessToken=CUSTOMER_TOKEN)
+    global LOGIN
+    LOGIN = False
     if result != False:
-        return render_template('index.html')
+        return redirect('/')
+    return redirect('/')
 
 
 @app.route('/setting')
