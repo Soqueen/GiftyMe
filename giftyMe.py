@@ -12,9 +12,10 @@ app.config.from_object(__name__)
 socketio = SocketIO(app)
 
 
+
 @app.route('/')
 def index():
-    print('Navigate in index.html')
+    print('Navigate in Home Page')
     return render_template('index.html')
 
 
