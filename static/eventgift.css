@@ -11,6 +11,18 @@ body {
 	text-align: left;
 }
 
+li a {
+	color: #333;
+}
+
+li a:visited {
+	color: #333;
+}
+
+li a:hover {
+	color: #333;
+}
+
 .sidenav a {
 	color: #fff;
 	text-transform: uppercase;
