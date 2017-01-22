@@ -1,7 +1,7 @@
 import json
 import os
 
-from flask import flash, Flask, jsonify, request, render_template
+from flask import flash, Flask, jsonify, redirect, request, render_template
 from flask_socketio import SocketIO
 # from time import gmtime, strftime
 # from urllib import *
@@ -28,7 +28,7 @@ def login_form():
     email = request.form['email']
     pwd = request.form['pwd']
     # TODO- CALL API FOR VERIFY THE LOGIN
-    return render_template('index.html')
+    return render_template('/')
 
 
 @app.route('/register')
@@ -40,12 +40,14 @@ def register():
 def register_form():
     email = request.form['email']
     pwd = request.form['pwd']
+    conf_pwd = request.form['conf_pwd']
     firstName = request.form['firstname']
     lastName = request.form['lastname']
-    print('email', email)
-    print('pwd: ', pwd)
+    # if conf_pwd != pwd:
+    #     flash(u'Your passwords do not match!')
+    #     return render_template('register.html')
     # TODO- CALL API FOR Register the new user
-    return render_template('index.html')
+    return redirect('/')
 
 if __name__ == '__main__':
     socketio.run(app)
