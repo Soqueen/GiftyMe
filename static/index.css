@@ -16,6 +16,21 @@ body {
 	text-transform: uppercase;
 }
 
+.btn-default {
+	background-color: #FCDF2B;
+	color: #27394f;
+	border-color: #e2c713;
+	box-shadow: 0 2px 0 #e6ca1f;
+}
+
+.btn {
+	border: none;
+	font-family: Dosis, sans-serif;
+	text-transform: uppercase;
+	border-radius: 0px;
+	outline: 0!important;
+}
+
 .dropdown-item {
 	text-align: center;
 }
