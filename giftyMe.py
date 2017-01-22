@@ -12,6 +12,7 @@ app.secret_key = "GiftMe"
 app.config.from_object(__name__)
 socketio = SocketIO(app)
 LOGIN = False
+CUSTOMER_TOKEN = None
 
 @app.route('/')
 def index():
@@ -59,7 +60,6 @@ def login_form():
     pwd = request.form['pwd']
     result = get_service('login', email=email, password=pwd)
     if result != False:
-
         global LOGIN
         LOGIN = True
         return render_template('indexprofile.html')
@@ -81,10 +81,21 @@ def register_form():
     result = get_service('signUp',  email=email, password=pwd)
     if result != False:
         print(result)
-        global LOGIN
-        LOGIN = True
-        return render_template('indexprofile.html')
-    return render_template('/')
+        result = get_service('login', email=email, password=pwd)
+        if result != False:
+            global LOGIN
+            LOGIN = True
+            global CUSTOMER_TOKEN
+            CUSTOMER_TOKEN = result['accessToken']
+            return render_template('indexprofile.html')
+    return render_template('index.html')
+
+
+@app.route('/logout')
+def logout():
+    result = get_service('logout', accessToken=CUSTOMER_TOKEN)
+    if result != False:
+        return render_template('index.html')
 
 
 if __name__ == '__main__':
