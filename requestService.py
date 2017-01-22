@@ -165,7 +165,7 @@ def get_service(service, **params):
         headers = {"Authorization": TOKEN,"Content-Type":"application/json"}
         r = requests.request("GET", url, headers=headers)  
            
-    #  3.  Get all prices*
+
     #  4.  Get single price*
     #  22. POST price for one product
     # example of params: {"productId": "53a358901b2e9dd2718b5c4e","originalAmount": 99.99,"currency": "USD",
@@ -180,6 +180,8 @@ def get_service(service, **params):
                     'content-type': "application/json",
                     }
         r = requests.request("POST", url, data=json.dumps(payload), headers=headers)
+    
+    #  3.  Get all prices*
     elif service == 'getPrice':
         url = BASE_URL+'/price/v1/'+TENANT+'/prices'
         headers = {
@@ -202,7 +204,7 @@ def get_service(service, **params):
         print(r)
     return False
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
     # get_service('postProduct', name="apple1",code="apple4",description="da la da da da",published="true")
     # example output: {'id': '5884339e6da68b001d6e01e4', 'yrn': 'urn:yaas:hybris:product:product:conuhack2017;5884339e6da68b001d6e01e4', 'link': 'https://api.beta.yaas.io/hybris/product/v2/conuhack2017/products/5884339e6da68b001d6e01e4'} 
     # get_service('getAllProduct')
@@ -223,7 +225,7 @@ if __name__ == '__main__':
     # example output: {'effectiveAmount': 45.0, 'productId': '5882ece1944b32001d36d422',  
                 #'priceId': '5882ece1aae4bf001df2c9e4', 'originalAmount': 45.0, 
                 #'yrn': 'urn:yaas:hybris:price:price:conuhack2017;5882ece1aae4bf001df2c9e4', 'currency': 'USD'}                                                                             
-    print('finished')
+    #print('finished')
     
     
     
