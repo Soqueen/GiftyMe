@@ -103,7 +103,7 @@ def logout():
 
 @app.route('/setting')
 def setting():
-    return render_template('setting.html')
+    return render_template('settings.html')
 if __name__ == '__main__':
     socketio.run(app)
 
