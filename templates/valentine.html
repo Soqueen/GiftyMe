@@ -60,11 +60,11 @@
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown">Login
+            <a class="dropdown-toggle" data-toggle="dropdown">Account
             <span class="caret"></span></a>
               <ul class="dropdown-menu">
-              <li><a href="{{ url_for('login') }}">Sign In</a></li>
-              <li><a href="{{ url_for('register') }}">Register</a></li>
+              <li><a href="{{ url_for('login') }}">Settings</a></li>
+              <li><a href="{{ url_for('register') }}">LogOut</a></li>
             </ul>
           </li>
       </ul>
@@ -92,6 +92,9 @@
       </div>
       <div class="dropdown show">
         <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">New Arrival</a>
+      </div>
+      <div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Past Orders</a>
       </div>
       <div class="dropdown show">
         <a class="btn btn-secondary dropdown-toggle" href="#" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contact Us</a>
@@ -127,7 +130,7 @@
             <div class="producttitle">Brown</div>
             <div class="productprice"><div class="pull-right"><a href="#" class="btn btn-danger btn-sm" role="button">BUY</a></div><div class="pricetext">$8.95</div></div>
         </div>
-
+        
         <button type="button" id="to-top-btn" ng-click="backToTop()" class="btn btn-link back-to-top-button pull-left menu">
           <span class="hyicon hyicon-cheveron-bold-up"></span>
         </button>
