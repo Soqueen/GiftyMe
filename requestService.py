@@ -101,10 +101,10 @@ def get_service(service, **params):
         headers = {"Authorization": TOKEN, "Accept-Language": "pl", "hybris-languages": "en","Content-Type":"application/json"}
         r = requests.get(url=url,headers=headers)
     #  2.  Get a single product*
-    elif service == 'getOneProduct':
-        url = BASE_URL+'/product'+'/v2/'+TENANT+'/products'+ ??product id
-        headers = {"Authorization": TOKEN, "Accept-Language": "pl", "hybris-languages": "en","Content-Type":"application/json"}
-        r = requests.get(url=url,headers=headers)
+    # elif service == 'getOneProduct':
+    #     url = BASE_URL+'/product'+'/v2/'+TENANT+'/products'+ ??product id
+    #     headers = {"Authorization": TOKEN, "Accept-Language": "pl", "hybris-languages": "en","Content-Type":"application/json"}
+    #     r = requests.get(url=url,headers=headers)
 
     #  3.  Get all prices*
     #  4.  Get single price*
@@ -162,7 +162,7 @@ def get_service(service, **params):
         url = BASE_URL+'/customer/v1/'+TENANT+'/customers'
         headers = {"Authorization": TOKEN,"Content-Type":"application/json"}
         r = requests.request("GET", url, headers=headers)
-    
+
     status = request_error(r)
     # -1 : token expire error
     ####################### RISKY OF INFINITE LOOP ##########################3

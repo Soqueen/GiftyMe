@@ -54,7 +54,37 @@ def register_form():
         return render_template('profile.html')
     return render_template('/')
 
-@app.route()
+@app.route('/valProduct')
+def valProduct():
+    result = get_service('getAllProduct')
+    valGold_id = result['id']
+    valGold_name = result['name']
+    valSilver_id = result['id']
+    valSilver_name = result['name']
+    valBronze_id = result['id']
+    valBronze_name = result['name']
+    # TODO -PLACE
+    # return render_template('eventgift.html', gpkg = , 'Love Silver Package', 'Love Si'] )
+
+@app.route('/christmasProduct')
+def valProduct():
+    result = get_service('getAllProduct')
+    chmassGold_id = result['id']
+    chmassGold_name = result['name']
+    chmassSilver_id = result['id']
+    chmassSilver_name = result['name']
+    chmassBronze_id = result['id']
+    chmassBronze_name = result['name']
+
+@app.route('/halloweenProduct')
+def valProduct():
+    result = get_service('getAllProduct')
+    halGold_id = result['id']
+    halGold_name = result['name']
+    halSilver_id = result['id']
+    halSilver_name = result['name']
+    halBronze_id = result['id']
+    halBronze_name = result['name']
 
 if __name__ == '__main__':
     socketio.run(app)
