@@ -1,10 +1,5 @@
-import json
-import os
-
-from flask import flash, Flask, jsonify, redirect, request, render_template
+from flask import Flask, redirect, request, render_template
 from flask_socketio import SocketIO
-# from time import gmtime, strftime
-# from urllib import *
 from requestService import get_service
 
 app = Flask(__name__)
@@ -17,10 +12,14 @@ CUSTOMER_TOKEN = None
 @app.route('/')
 def index():
     print('Navigate in Home Page')
+    return redirect('/home')
+
+
+@app.route('/home')
+def home():
     if LOGIN:
         return render_template('indexprofile.html')
     return render_template('index.html')
-
 
 @app.route('/contact')
 def contact():
@@ -104,9 +103,7 @@ def logout():
     result = get_service('logout', accessToken=CUSTOMER_TOKEN)
     global LOGIN
     LOGIN = False
-    if result != False:
-        return redirect('/')
-    return redirect('/')
+    return redirect('/home')
 
 
 @app.route('/setting')
