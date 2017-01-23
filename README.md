@@ -9,13 +9,13 @@
 ##### 5. Create Yaas API Identifier (SAP)
 
 ## API REFERENCE
-##### This project is using SAP Yaas RESTful API. For more information about the API documentation, please visit `https://devportal.yaas.io/services/` 
+###### This project is used SAP Yaas RESTful API. For more information about the API documentation, please visit `https://devportal.yaas.io/services/` 
 
 ## RUN THE APPLICATION
-##### 1. Clone the project: `git clone git@github.com:Soqueen/GiftyMe.git`
-##### 2. Go to the `GiftyMe` project folder
-##### 3. Run the  `giftyMe.py` script: `python3 giftyMe.py`
-##### 4. Open the Chrom browser and go to `http://127.0.0.1:5000` 
+###### 1. Clone the project: `git clone git@github.com:Soqueen/GiftyMe.git`
+###### 2. Go to the `GiftyMe` project folder
+###### 3. Run the  `giftyMe.py` script: `python3 giftyMe.py`
+###### 4. Open the Chrom browser and go to `http://127.0.0.1:5000` 
 
 ## CONTRIBUTOR
 #####[SOK HENG LIM](https://github.com/Soqueen)
