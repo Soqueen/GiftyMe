@@ -9,7 +9,7 @@
 ##### 5. Create Yaas API Identifier (SAP)
 
 ## API REFERENCE
-##### This project is dependend on YAAS service. For more information about the API documentation, please visit `https://devportal.yaas.io/services/` 
+##### This project is using SAP Yaas RESTful API. For more information about the API documentation, please visit `https://devportal.yaas.io/services/` 
 
 ## RUN THE APPLICATION
 ##### 1. Clone the project: `git clone git@github.com:Soqueen/GiftyMe.git`
