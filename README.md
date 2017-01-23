@@ -19,7 +19,7 @@
 
 ## CONTRIBUTOR
 #####[SOK HENG LIM](https://github.com/Soqueen)
-#####[BONNIE ](https://github.com/Bonnie970)
+#####[BONNIE HU](https://github.com/Bonnie970)
 #####[JESSY YU](https://github.com/jess305272)
 
 ## LICENSE
