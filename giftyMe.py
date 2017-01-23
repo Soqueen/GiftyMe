@@ -40,7 +40,7 @@ def valentine_gift():
     if LOGIN:
         return render_template('valentineprofile.html')
 
-    return render_template('valentineprofile.html')
+    return render_template('valentine.html')
 
 @app.route('/halloween_gift')
 def halloween_gift():
